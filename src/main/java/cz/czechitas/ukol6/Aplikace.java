@@ -10,16 +10,19 @@ import java.awt.event.ActionEvent;
 
 public class Aplikace extends JFrame {
 
-    private JLabel husyLabel;
     private JLabel kraliciLabel;
+    private JLabel husyLabel;
+
     private JLabel pocetHlavLabel;
-    private JLabel pocetNohouLabel;
+    private JLabel pocetNohLabel;
     private JTextField husyField;
     private JTextField kraliciField;
-    private JTextField pocetHlavField;
-    private JTextField pocetNohouField;
 
-    private JButton vypocitatButton;
+    private JTextField pocetNohField;
+    private JTextField pocetHlavField;
+
+
+    private JButton vypocitejButton;
 
     public static void main(String[] args) {
         FlatLightLaf.setup();
@@ -44,13 +47,6 @@ public class Aplikace extends JFrame {
 
         //TODO implementovat formulář podle zadání
 
-        husyField = new JTextField();
-        husyField.setHorizontalAlignment(JTextField.TRAILING);
-        husyLabel = new JLabel("Husy");
-        husyLabel.setLabelFor(husyField);
-        add(husyLabel);
-        add(husyField);
-
         kraliciField = new JTextField();
         kraliciField.setHorizontalAlignment(JTextField.TRAILING);
         kraliciLabel = new JLabel("Králíci");
@@ -58,8 +54,14 @@ public class Aplikace extends JFrame {
         add(kraliciLabel);
         add(kraliciField);
 
-        add(createButtonBar(),"span");
+        husyField = new JTextField();
+        husyField.setHorizontalAlignment(JTextField.TRAILING);
+        husyLabel = new JLabel("Husy");
+        husyLabel.setLabelFor(husyField);
+        add(husyLabel);
+        add(husyField);
 
+        add(createButtonBar(),"span");
 
         pocetHlavField = new JTextField();
         pocetHlavField.setHorizontalAlignment(JTextField.TRAILING);
@@ -69,28 +71,28 @@ public class Aplikace extends JFrame {
         add(pocetHlavLabel);
         add(pocetHlavField);
 
-        pocetNohouField = new JTextField();
-        pocetNohouField.setHorizontalAlignment(JTextField.TRAILING);
-        pocetNohouField.setEditable(false);
+        pocetNohField = new JTextField();
+        pocetNohField.setHorizontalAlignment(JTextField.TRAILING);
+        pocetNohField.setEditable(false);
         pocetHlavField.isEnabled();
-        pocetNohouLabel = new JLabel("Počet nohou");
-        pocetNohouLabel.setLabelFor(pocetNohouField);
-        add(pocetNohouLabel);
-        add(pocetNohouField);
+        pocetNohLabel = new JLabel("Počet noh");
+        pocetNohLabel.setLabelFor(pocetNohField);
+        add(pocetNohLabel);
+        add(pocetNohField);
 
         pack();
 
-        vypocitatButton.addActionListener(this::handleVypocitat);
+        vypocitejButton.addActionListener(this::handleVypocitej);
 
         }
     private JPanel createButtonBar(){
-        vypocitatButton = new JButton("Vypočítat");
+        vypocitejButton = new JButton("Vypočítej");
         JPanel buttonBar = new JPanel(new MigLayout(null, "[right, grow]"));
-        buttonBar.add(vypocitatButton);
+        buttonBar.add(vypocitejButton);
         return buttonBar;
 
 }
-    private void handleVypocitat (ActionEvent actionEvent){
+    private void handleVypocitej (ActionEvent actionEvent){
         System.out.println("Počítám..");
         String kraliciHlavyText = kraliciField.getText();
         int kraliciHlavyCislo = Integer.parseInt(kraliciHlavyText);
@@ -105,10 +107,10 @@ public class Aplikace extends JFrame {
         int kraliciNohyCislo = Integer.parseInt(kraliciNohytext);
         String husyNohyText = husyField.getText();
         int husynohyCislo = Integer.parseInt(husyNohyText);
-        int pocetNohouCelkem = (kraliciNohyCislo*4) +(husynohyCislo*2);
-        String pocetNohouCelkemtext = Integer.toString(pocetNohouCelkem);
-        System.out.println("Počet nohou:"+ pocetNohouCelkemtext);
-        pocetNohouField.setText(pocetNohouCelkemtext);
+        int pocetNohCelkem = (kraliciNohyCislo*4) +(husynohyCislo*2);
+        String pocetNohCelkemtext = Integer.toString(pocetNohCelkem);
+        System.out.println("Počet noh:"+ pocetNohCelkemtext);
+        pocetNohField.setText(pocetNohCelkemtext);
 
    }
 }
